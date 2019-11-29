@@ -6,13 +6,15 @@ import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
 open class DelegateListAdapter<T : Diffable>(delegates: List<BaseAdapterDelegate<out T>>) :
-    AsyncListDifferDelegationAdapter<Diffable>(DiffableItemCallback, AdapterDelegateManager()), StickyHeaderHandler {
+    AsyncListDifferDelegationAdapter<Diffable>(DiffableItemCallback, AdapterDelegateManager()),
+    StickyHeaderHandler {
 
     init {
         delegates.iterator().forEach { this.delegatesManager.addDelegate(it) }
     }
 
-    var onItemClickListener: ((diffable: Diffable, viewHolder: RecyclerView.ViewHolder) -> Unit)? = null
+    var onItemClickListener: ((diffable: Diffable, viewHolder: RecyclerView.ViewHolder) -> Unit)? =
+        null
 
     override fun getItemCount(): Int = items.size
 
